@@ -1,0 +1,62 @@
+$color-primary:#009d7f;
+$color-white:#fff;
+
+body {
+    text-align: center;
+    min-height: 100vh;
+    background: $color-primary;
+    color: $color-white;
+}
+
+.center-block {
+    margin: auto;
+}
+
+@mixin circle($dim, $color) {
+    width: $dim;
+    height: $dim;
+    border-radius: $dim/2;
+    background: $color;
+}
+
+@mixin triangle($width, $dir, $color) {
+    width: 0;
+    height: 0;
+    @if $dir==top {
+        border-top: 0 solid transparent;
+        border-bottom: $width solid $color;
+        border-left: $width solid transparent;
+        border-right: $width solid transparent;
+    }
+    @if $dir==bottom {
+        border-bottom: 0 solid transparent;
+        border-top: $width solid $color;
+        border-left: $width solid transparent;
+        border-right: $width solid transparent;
+    }
+    @if $dir==left {
+        border-top: $width solid transparent;
+        border-right: $width solid $color;
+        border-left: 0 solid transparent;
+        border-bottom: $width solid transparent;
+    }
+    @if $dir==right {
+        border-top: $width solid transparent;
+        border-left: $width solid $color;
+        border-bottom: $width solid transparent;
+        border-right: 0 solid transparent;
+    }
+}
+
+@each $dirc in top,
+bottom,
+right,
+left {
+    .triangle-#{$dirc} {
+        @include triangle(100px, $dirc, #333);
+    }
+}
+
+.white-circle {
+    @include circle(100px, #333);
+}
